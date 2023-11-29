@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "First Page";
+}
+@{
+    Layout = "_Layout"; // Varsayılan layout'unuzu kullanabilirsiniz.
+}
+
+<!-- Bootstrap ve DataTables için CSS dosyalarını dahil et -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<div class="container mt-5">
+    <h2>Örnek DataTable</h2>
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>Yaş</th>
+                <th>Şehir</th>
+                <th>Ülke</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Verileriniz buraya gelecek -->
+            <tr>
+                <td>Ahmet</td>
+                <td>Yılmaz</td>
+                <td>30</td>
+                <td>İstanbul</td>
+                <td>Türkiye</td>
+            </tr>
+            <!-- Diğer satırlar... -->
+        </tbody>
+    </table>
+</div>
+
+<!-- JavaScript kütüphaneleri -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
