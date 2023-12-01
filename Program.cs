@@ -1,13 +1,27 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore; // DbContext eklemeyi unutmayın
+using PersonelGirisKontrolSistemi.Models;
+using PersonelGirisKontrolSistemi.Controllers;
+// DbContext sınıfınıza ait namespace'i ekleyin
 using PersonelGirisKontrolSistemi.Services;
-
+using YourNamespace;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// DbContext'i ekleyin
+builder.Services.AddDbContext<MyDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
 //AD bağlantısı için sağlıyorum.
-builder.Services.AddScoped< IUserService, ActiveDirectoryUserService>();
+builder.Services.AddScoped<IUserService, ActiveDirectoryUserService>();
+
 var app = builder.Build();
+
 // Middleware yapılandırmaları
 // Örneğin, kimlik doğrulama ve yetkilendirme middleware'leri
 app.UseAuthentication();
@@ -24,11 +38,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+//db bağlantısı için
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(
